@@ -1,0 +1,32 @@
+# project: cj9o65e6d0no00192mmyy0i9c
+# version: 18
+
+type File @model {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
+
+type User @model {
+  createdAt: DateTime!
+  name: String
+  email: String @isUnique
+  id: ID! @isUnique
+  password: String
+  updatedAt: DateTime!
+  excuses: [Undskyldning!]! @relation(name: "UserExcuses")
+  admin: Boolean @defaultValue(value: false)
+}
+
+type Undskyldning @model {
+  id: ID! @isUnique
+  content: String! @isUnique
+  createdBy: User @relation(name: "UserExcuses")
+  createdAt: DateTime!
+  isAccepted: Boolean @defaultValue(value: false)
+}
