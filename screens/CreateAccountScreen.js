@@ -5,17 +5,19 @@ import {graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import TopComp from '../components/TopComp';
 
-class LoginScreen extends Component {
+class CreateAccountScreen extends Component {
     
   constructor(props){
     super(props);
     this.state = {
       email: "",
       password: "",
+      name: ""
     };
   }
+
   static navigationOptions = {
-    drawerLabel: 'Login',
+    drawerLabel: 'Create Account',
     drawerIcon: ({ tintColor }) => (
       <Image
         source={require('../assets/icon.png')}
@@ -25,42 +27,31 @@ class LoginScreen extends Component {
   };
 
   _confirm = async () => {
-    const { email, password } = this.state;
-    //Login
+    const { email, password, name } = this.state;
+    //Create Account
 
     var result;
     try{
-      result = await this.props.signinUserMutation({
+        result = await this.props.createUserMutation({
         variables: {
-          email,
-          password,
-        }
-      });
-      const id = result.data.signinUser.user.id;
-      const name = result.data.signinUser.user.name;
-      const token = result.data.signinUser.token;
-      this._saveUserData(id, name, token);
-      
-      //Velkomst navn
-      AsyncStorage.getItem("name").then((val) => Alert.alert("Velkommen " + val));
-      this.props.navigation.navigate('Home');
+            name,
+            email,
+            password
+        }});
+        Alert.alert("Velkommen "+ name + ", du kan nu logge ind!");
+        this.props.navigation.navigate('Login');
     }
     catch(error){
-      Alert.alert("Fejl i login! Check dine konto oplysninger")
+        Alert.alert("Email eksisterer allerede!");
     }
   };
 
-  _saveUserData = (id, name, token) => {
-    AsyncStorage.setItem(GC_USER_ID, id)
-    AsyncStorage.setItem("name", name)
-    AsyncStorage.setItem(GC_AUTH_TOKEN, token)
-  }
   
   render() {
     return (
       <View style={{flex: 1}}>
       <TopComp />
-      <Text style={styles.headline}>Login{"\n\n"}</Text>
+      <Text style={styles.headline}>Create New Account{"\n\n"}</Text>
       <View style={{flex: 1, alignItems: 'center'}}>
         <Text>Email:</Text>
         <TextInput 
@@ -76,23 +67,26 @@ class LoginScreen extends Component {
           placeholder="Password"
           onChangeText={(text) => this.setState({password: text})}
         />
+        <Text>Name:</Text>
+        <TextInput 
+          style={{height: 40, width: 200}}
+          placeholder="Name"
+          onChangeText={(text) => this.setState({name: text})}
+        />
       </View>
       <View style={{flex: 1, alignItems: 'center'}}>
+      <Text>{"\n"}</Text>
         <Button
           onPress={() => this._confirm()}
-          title="Login"
-        />
-        <Text>{"\n"}</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate('CreateAccount')}
           title="Create New Account"
           color="black"
         />
       </View>
     </View>
     );
-  }
-} 
+    }
+}
+    
 
   const styles = StyleSheet.create({
     icon: {
@@ -105,23 +99,17 @@ class LoginScreen extends Component {
     }
 });
 
-const SIGNIN_USER_MUTATION = gql`
-mutation SigninUserMutation($email: String!, $password: String!) {
-  signinUser(email: {
-    email: $email,
-    password: $password
-  }) {
-    token
-    user {
-      id
-      name
-      createdAt
-      excuses {
+const SIGNUP_USER_MUTATION = gql`
+mutation createUserMutation($email: String!, $password: String!, $name: String!) {
+      createUser(
+        authProvider: {
+          email: { email: $email, password: $password }}
+      name: $name
+      admin: false
+      ){
         id
       }
-    }
-  }
 }
 `
 
-export default compose(graphql(SIGNIN_USER_MUTATION, { name: 'signinUserMutation' }))(LoginScreen);
+export default compose(graphql(SIGNUP_USER_MUTATION, { name: 'createUserMutation' }))(CreateAccountScreen);

@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 2948,
+  "expoServerNgrokUrl": "https://hx-35x.viter.native2.exp.direct",
+  "packagerNgrokUrl": "https://packager.hx-35x.viter.native2.exp.direct",
+  "ngrokPid": 11180
 }

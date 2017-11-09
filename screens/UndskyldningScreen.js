@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Clipboard } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, Clipboard, Alert } from 'react-native';
 import UndskyldComp from '../components/UndskyldComp';
 import { observer } from "mobx-react";
 import undskyldStore from "../stores/UndskyldStore";
+import TopComp from '../components/TopComp';
 
 
 @observer
@@ -21,15 +22,14 @@ export default class UndskyldningScreen extends React.Component {
     setClipBoard(){
       Clipboard.setString("Jeg kan desværre ikke, jeg skal " + undskyldStore.currentText);
       //Animation
-      console.warn(undskyldStore.currentText);
+      //Find en ordenlig alert
+      Alert.alert("Sat undskyldning i udklipsholder!");
     }
   
     render() {
       return (
         <View style={{flex: 1}}>
-          <View style={{flex: 1}}>
-            <Button title="H" onPress={() => this.props.navigation.navigate('DrawerOpen')}/>
-          </View>
+          <TopComp />
           <View style={{flex: 2, alignItems: 'center'}}>
             <Text style={styles.text}>Jeg kan desværre ikke, jeg skal</Text>
             <UndskyldComp style={styles.text}/>
