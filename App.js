@@ -11,6 +11,7 @@ import LoginScreen from './screens/LoginScreen';
 import CreateAccountScreen from './screens/CreateAccountScreen';
 import SubmissionScreen from './screens/SubmissionScreen';
 import LogoutScreen from './screens/LogoutScreen';
+import AllUndskyldningScreen from './screens/AllUndskyldningScreen';
 import { GC_USER_ID, GC_AUTH_TOKEN } from './constants';
 
 const httpLink = new HttpLink({ uri: 'https://api.graph.cool/simple/v1/cj9o65e6d0no00192mmyy0i9c' });
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
 const DrawerNavi = DrawerNavigator({
   Home: {
     screen: UndskyldningScreen,
+  },
+  AlleUndskyldninger: {
+    screen: AllUndskyldningScreen,
   },
   Login: {
     screen: LoginScreen,

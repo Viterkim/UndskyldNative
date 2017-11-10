@@ -52,7 +52,7 @@ class CreateAccountScreen extends Component {
       <View style={{flex: 1}}>
       <TopComp />
       <Text style={styles.headline}>Create New Account{"\n\n"}</Text>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 7, alignItems: 'center'}}>
         <Text>Email:</Text>
         <TextInput 
           autoCorrect={false}
@@ -73,14 +73,12 @@ class CreateAccountScreen extends Component {
           placeholder="Name"
           onChangeText={(text) => this.setState({name: text})}
         />
-      </View>
-      <View style={{flex: 1, alignItems: 'center'}}>
-      <Text>{"\n"}</Text>
+        <Text>{"\n"}</Text>
         <Button
-          onPress={() => this._confirm()}
-          title="Create New Account"
-          color="black"
-        />
+        onPress={() => this._confirm()}
+        title="Create New Account"
+        color="black"
+      />
       </View>
     </View>
     );

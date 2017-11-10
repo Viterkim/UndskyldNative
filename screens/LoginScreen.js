@@ -61,7 +61,7 @@ class LoginScreen extends Component {
       <View style={{flex: 1}}>
       <TopComp />
       <Text style={styles.headline}>Login{"\n\n"}</Text>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 7, alignItems: 'center'}}>
         <Text>Email:</Text>
         <TextInput 
           autoCorrect={false}
@@ -76,17 +76,10 @@ class LoginScreen extends Component {
           placeholder="Password"
           onChangeText={(text) => this.setState({password: text})}
         />
-      </View>
-      <View style={{flex: 1, alignItems: 'center'}}>
+        <Text>{"\n"}</Text>
         <Button
           onPress={() => this._confirm()}
           title="Login"
-        />
-        <Text>{"\n"}</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate('CreateAccount')}
-          title="Create New Account"
-          color="black"
         />
       </View>
     </View>

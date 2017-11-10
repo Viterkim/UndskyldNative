@@ -29,12 +29,6 @@ query {
 @observer
 class UndskyldComp extends Component {
 
-    componentWillMount(){
-      if(!undskyldStore.undList){
-        undskyldStore.setUndList(this.props.allUndskyldningsQuery.allUndskyldnings);
-      }
-    }
-
     getRandomUndIndex(){
       return Math.floor(Math.random() * this.props.allUndskyldningsQuery.allUndskyldnings.length);
     }
@@ -52,6 +46,12 @@ class UndskyldComp extends Component {
       //Force a refresh from other component
       if(undskyldStore.buttonPressedCounter > 0){
       }
+
+      //Sets list
+      if(undskyldStore.undList.length < 1){
+        undskyldStore.setUndList(this.props.allUndskyldningsQuery.allUndskyldnings);
+      }
+      
 
       var randomIndex = this.getRandomUndIndex();
       var showText = (this.props.allUndskyldningsQuery.allUndskyldnings[randomIndex].content);

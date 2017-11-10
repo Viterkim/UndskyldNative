@@ -50,18 +50,19 @@ class SubmissionScreen extends React.Component {
     return (
       <View style={{flex: 1}}>
         <TopComp />
-        <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={styles.text}>Indtast en ny undskyldning så det giver mening efter{"\n"}
-          "Jeg kan desværre ikke jeg skal..."</Text>
+        <View style={{flex: 5, alignItems: 'center'}}>
+          <Text style={styles.text}>Indtast en ny undskyldning så det giver mening efter{"\n\n"}
+          "Jeg kan desværre ikke jeg skal..."{"\n\n"}</Text>
           <TextInput 
             autoCorrect={false}
             style={{height: 60, width: 300}}
             placeholder="Ny Undskyldning"
             onChangeText={(text) => this.setState({content: text})}
           />
-          <Text>{"\n\n"}</Text>
+          <Text>{"\n"}</Text>
           <Button
             onPress={() => this._submit(createdById)}
+            color="black"
             title="Submit Ny Undskyldning"
           />
         </View>
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
       fontSize: 32
     },
     text: {
-      fontSize: 20,
+      fontSize: 16,
       textAlign: 'center'
     }
 });

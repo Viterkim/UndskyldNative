@@ -30,7 +30,7 @@ export default class LogoutScreen extends Component {
       <View style={{flex: 1}}>
       <TopComp />
       <Text style={styles.headline}>Logout{"\n\n"}</Text>
-      <View style={{flex: 1, alignItems: 'center'}}>
+      <View style={{flex: 7, alignItems: 'center'}}>
         <Button
           onPress={() => this._logout()}
           title="Logout"
